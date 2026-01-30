@@ -17,6 +17,6 @@ public class Main {
         gerenciador.listarOrdenadasPorDataLimite().forEach(System.out::println);
 
         // Notificação extra
-        NotificadorTarefas.notificarTarefasProximas(gerenciador, 2);
+        NotificadorTarefas.notificarTarefasProximas(gerenciador, 1);
     }
 }

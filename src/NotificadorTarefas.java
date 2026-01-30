@@ -15,6 +15,6 @@ public class NotificadorTarefas {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-        });
+        }).join();
     }
 }
