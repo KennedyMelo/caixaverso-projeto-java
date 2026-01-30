@@ -45,9 +45,12 @@ public class GerenciadorTarefas {
 
     public List<Tarefa> tarefasProximasDoPrazo(int dias) {
         LocalDate hoje = LocalDate.now();
-        return tarefas.stream()
-                .filter(t -> !t.getStatus().equals(StatusTarefa.CONCLUIDO))
-                .filter(t -> !t.getDataLimite().isBefore(hoje) && !t.getDataLimite().isAfter(hoje.plusDays(dias)))
+        Predicate<Tarefa> naoConcluida = t -> !t.getStatus().equals(StatusTarefa.CONCLUIDO);
+        Predicate<Tarefa> dentroDoPrazo = t -> !t.getDataLimite().isBefore(hoje) && !t.getDataLimite().isAfter(hoje.plusDays(dias));
+        return Optional.of(tarefas)
+                .orElse(Collections.emptyList())
+                .stream()
+                .filter(naoConcluida.and(dentroDoPrazo))
                 .collect(Collectors.toList());
     }
 }
