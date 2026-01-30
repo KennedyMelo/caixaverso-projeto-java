@@ -21,7 +21,9 @@ public class GerenciadorTarefas {
     }
 
     public List<Tarefa> listarTodas() {
-        return new ArrayList<>(tarefas);
+        return Optional.ofNullable(tarefas)
+                .map(ArrayList::new)
+                .orElse(new ArrayList<>());
     }
 
     public List<Tarefa> filtrarPorStatus(StatusTarefa status) {
