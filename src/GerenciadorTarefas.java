@@ -21,19 +21,24 @@ public class GerenciadorTarefas {
     }
 
     public List<Tarefa> listarTodas() {
-        return Optional.ofNullable(tarefas)
+        return Optional.of(tarefas)
                 .map(ArrayList::new)
                 .orElse(new ArrayList<>());
     }
 
     public List<Tarefa> filtrarPorStatus(StatusTarefa status) {
-        return tarefas.stream()
-                .filter(t -> t.getStatus() == status)
+        Predicate<Tarefa> statusPredicate = t -> t.getStatus() == status;
+        return Optional.of(tarefas)
+                .orElse(Collections.emptyList())
+                .stream()
+                .filter(statusPredicate)
                 .collect(Collectors.toList());
     }
 
     public List<Tarefa> listarOrdenadasPorDataLimite() {
-        return tarefas.stream()
+        return Optional.of(tarefas)
+                .orElse(Collections.emptyList())
+                .stream()
                 .sorted(Comparator.comparing(Tarefa::getDataLimite))
                 .collect(Collectors.toList());
     }
