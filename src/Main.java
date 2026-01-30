@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 
 public class Main {
+
+    private static final int DIAS = 2;
+
     public static void main(String[] args) {
         GerenciadorTarefas gerenciador = new GerenciadorTarefas();
 
@@ -17,6 +20,6 @@ public class Main {
         gerenciador.listarOrdenadasPorDataLimite().forEach(System.out::println);
 
         // Notificação extra
-        NotificadorTarefas.notificarTarefasProximas(gerenciador, 1);
+        NotificadorTarefas.notificarTarefasProximas(gerenciador, DIAS);
     }
 }
